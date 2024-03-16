@@ -1,16 +1,26 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { ServeStaticModule } from '@nestjs/serve-static';
-import { join } from 'path';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver } from '@nestjs/apollo';
+import { LessonModule } from './lesson/lesson.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Lesson } from './lesson/lesson.entity';
 
 @Module({
   imports: [
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '../..', 'client', 'dist'),
+    TypeOrmModule.forRoot({
+      type: 'mongodb',
+      url: 'mongodb://localhost/school',
+      synchronize: true,
+      useUnifiedTopology: true,
+      entities: [Lesson],
     }),
+    GraphQLModule.forRoot({
+      autoSchemaFile: true,
+      driver: ApolloDriver,
+    }),
+    LessonModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
