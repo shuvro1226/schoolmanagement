@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
-import { Lesson } from "../../types/LessonTypes";
+import { Lesson as LessonType } from "../../types/LessonTypes";
+import Lesson from "./Lesson";
+
 export default function Lessons() {
-  const [lessons, setLessons] = useState<Lesson[]>([]);
+  const [lessons, setLessons] = useState<LessonType[]>([]);
   const handleFetchGreeting = useCallback(() => {
     fetch(`http://${import.meta.env.VITE_BACKEND_HOST}/graphql`, {
       method: "POST",
@@ -13,7 +15,7 @@ export default function Lessons() {
       }),
     })
       .then((response) => response.json())
-      .then((data: { data: { lessons: Lesson[] } }) => {
+      .then((data: { data: { lessons: LessonType[] } }) => {
         setLessons(data.data.lessons);
       });
   }, []);
@@ -23,14 +25,13 @@ export default function Lessons() {
   }, [handleFetchGreeting]);
 
   return (
-    <>
-      {lessons?.map((lesson: Lesson) => {
-        return (
-          <div key={lesson.id}>
-            <h3>{lesson.name}</h3>
-          </div>
-        );
-      })}
-    </>
+    <div className="container">
+      <h2 className="text-xl mb-4">Lessons</h2>
+      <div className="grid grid-cols-3 gap-8">
+        {lessons?.map((lesson: LessonType) => {
+          return <Lesson key={lesson.id} lesson={lesson} />;
+        })}
+      </div>
+    </div>
   );
 }
