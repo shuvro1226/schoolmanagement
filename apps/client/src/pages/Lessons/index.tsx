@@ -26,9 +26,9 @@ export default function Lessons() {
     <>
       {lessons?.map((lesson: Lesson) => {
         return (
-          <>
+          <div key={lesson.id}>
             <h3>{lesson.name}</h3>
-          </>
+          </div>
         );
       })}
     </>
