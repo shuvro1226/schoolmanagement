@@ -4,6 +4,7 @@ import Layout from "./layouts";
 import LessonDetails from "./pages/LessonDetails";
 import "react-datepicker/dist/react-datepicker.css";
 import "./App.css";
+import Students from "./pages/Students";
 
 function App() {
   const router = createBrowserRouter([
@@ -14,6 +15,10 @@ function App() {
         {
           path: "/lesson/:lessonId",
           element: <LessonDetails />,
+        },
+        {
+          path: "/students",
+          element: <Students />,
         },
       ],
     },

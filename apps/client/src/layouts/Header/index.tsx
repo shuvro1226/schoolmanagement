@@ -13,11 +13,19 @@ export default function Header() {
           <NavigationMenuItem>
             <NavLink
               className={({ isActive }) =>
-                isActive ? "text-blue-600" : "text-black"
+                `me-4 ${!isActive ? " text-blue-600" : " text-black"}`
               }
               to={"/"}
             >
               Lessons
+            </NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                `me-4 ${!isActive ? " text-blue-600" : " text-black"}`
+              }
+              to={"/students"}
+            >
+              Students
             </NavLink>
           </NavigationMenuItem>
         </NavigationMenuList>
