@@ -19,6 +19,7 @@ export const getLessonByID = gql`
       startDate
       endDate
       students {
+        id
         firstName
         lastName
       }

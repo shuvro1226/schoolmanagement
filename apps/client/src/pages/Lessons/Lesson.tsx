@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Lesson as LessonType } from "../../types/LessonTypes";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import dayjs from "dayjs";
 
 interface Props {
   lesson: LessonType;
@@ -16,8 +17,8 @@ export default function Lesson(props: Props) {
           <CardTitle>{name}</CardTitle>
         </CardHeader>
         <CardContent>
-          <p>{startDate}</p>
-          <p>{endDate}</p>
+          <p>{dayjs(startDate).format('DD/MM/YYYY')}</p>
+          <p>{dayjs(endDate).format('DD/MM/YYYY')}</p>
         </CardContent>
       </Card>
     </Link>
