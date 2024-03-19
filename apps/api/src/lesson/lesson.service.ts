@@ -36,7 +36,7 @@ export class LessonService {
   ): Promise<Lesson> {
     const { lessonId, studentIds } = assignStudentsToLessonInput;
     const lesson = await this.lessonRepository.findOneBy({ id: lessonId });
-    lesson.students = [...lesson.students, ...studentIds];
+    lesson.students = [...studentIds];
     return this.lessonRepository.save(lesson);
   }
 }

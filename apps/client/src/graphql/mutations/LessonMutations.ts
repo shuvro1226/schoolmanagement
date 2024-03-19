@@ -15,3 +15,23 @@ export const CreateLessonMutation = gql`
     }
   }
 `;
+
+export const AssignStudentsToLessonMutation = gql`
+  mutation assignStudentsToLesson($lessonId: ID!, $students: [ID!]!) {
+    assignStudentsToLesson(
+      assignStudentsToLessonInput: {
+        lessonId: $lessonId
+        studentIds: $students
+      }
+    ) {
+      id
+      name
+      startDate
+      endDate
+      students {
+        firstName
+        lastName
+      }
+    }
+  }
+`;

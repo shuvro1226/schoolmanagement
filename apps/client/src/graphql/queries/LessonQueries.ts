@@ -11,7 +11,7 @@ export const getAllLessons = gql`
   }
 `;
 
-export const getLessonByID = gql`
+export const getLessonByIDQuery = gql`
   query getLessonByID($id: String!) {
     lesson(id: $id) {
       id

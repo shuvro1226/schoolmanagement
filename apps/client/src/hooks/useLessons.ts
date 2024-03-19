@@ -12,6 +12,13 @@ import dayjs from "dayjs";
 import { OptionType } from "@/types/types";
 import { MultiValue } from "react-select";
 
+const lessonDataDefaultValue: LessonFormInputType = {
+  name: "",
+  startDate: dayjs().toDate(),
+  endDate: dayjs().add(7, "day").toDate(),
+  students: null,
+};
+
 export default function useLessons(): LessonHookReturnType {
   const [lessons, setLessons] = useState<Lesson[]>([]);
   const [getLessons] = useLazyQuery(getAllLessons, {
@@ -26,6 +33,7 @@ export default function useLessons(): LessonHookReturnType {
       },
       onCompleted: () => {
         handleGetLessons();
+        setLessonData({ ...lessonDataDefaultValue }); // Setting lesson data to default value after creating lesson
       },
     });
   };
@@ -39,10 +47,7 @@ export default function useLessons(): LessonHookReturnType {
   };
 
   const [lessonData, setLessonData] = useState<LessonFormInputType>({
-    name: "",
-    startDate: dayjs().toDate(),
-    endDate: dayjs().add(7, "day").toDate(),
-    students: null,
+    ...lessonDataDefaultValue,
   });
   const [error, setError] = useState({
     show: false,

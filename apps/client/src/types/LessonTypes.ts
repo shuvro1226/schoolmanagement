@@ -22,7 +22,7 @@ export type LessonFormInputType = {
   startDate: Date;
   endDate: Date;
   students: null | OptionType[];
-}
+};
 
 export type CreateLessonErrorType = {
   show: boolean;
@@ -50,4 +50,20 @@ export type LessonHookReturnType = {
   handleFormDataChange: HandleFormDataChange;
   handleGetLessons: HandleGetLessons;
   handleCreateLesson: HandleCreateLesson;
+};
+
+type HandleGetLessonByID = () => void;
+
+type HandleUpdateStudents = (value: OptionType[] | null) => void;
+
+type HandleAddStudentsToLesson = (
+  e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+) => void;
+
+export type LessonDetailsHookReturnType = {
+  lessonDetails: Lesson;
+  newStudents: OptionType[] | null;
+  handleGetLessonByID: HandleGetLessonByID;
+  handleUpdateStudents: HandleUpdateStudents;
+  handleAddStudentsToLesson: HandleAddStudentsToLesson;
 };
