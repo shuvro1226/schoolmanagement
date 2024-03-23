@@ -10,7 +10,7 @@ import { LessonType } from './lesson.type';
 import { LessonService } from './lesson.service';
 import { AssignStudentsToLessonInput, CreateLessonInput } from './lesson.input';
 import { Lesson } from './lesson.entity';
-import { StudentService } from 'src/student/student.service';
+import { StudentService } from '../student/student.service';
 
 @Resolver(() => LessonType)
 export class LessonResolver {
