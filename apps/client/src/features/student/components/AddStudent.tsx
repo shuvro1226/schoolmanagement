@@ -16,7 +16,7 @@ import { StudentHookReturnType } from "@/types/StudentTypes";
 
 export default function AddStudent(props: {
   studentHookObj: StudentHookReturnType;
-}) {
+}): JSX.Element {
   const { studentHookObj } = props;
   const {
     error,

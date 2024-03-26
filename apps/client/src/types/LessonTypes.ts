@@ -2,20 +2,19 @@ import { MultiValue } from "react-select";
 import { Student } from "./StudentTypes";
 import { OptionType } from "./types";
 
-export type Lesson = {
-  id?: string;
+interface BaseLessonType {
   name: string;
   startDate: string;
   endDate: string;
-  students: Student[];
-};
-
-export type CreateLessonInput = {
-  name: string;
-  startDate: string;
-  endDate: string;
+}
+export interface CreateLessonInput extends BaseLessonType {
   students: string[];
-};
+}
+
+export interface Lesson extends BaseLessonType {
+  id?: string;
+  students: Student[];
+}
 
 export type LessonFormInputType = {
   name: string;

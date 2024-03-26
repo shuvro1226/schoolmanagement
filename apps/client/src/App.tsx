@@ -1,12 +1,12 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Lessons from "./pages/Lessons";
-import Layout from "./layouts";
+import Layout from "./layouts/Layout";
 import LessonDetails from "./pages/LessonDetails";
 import "react-datepicker/dist/react-datepicker.css";
 import "./App.css";
 import Students from "./pages/Students";
 
-function App() {
+function App(): JSX.Element {
   const router = createBrowserRouter([
     {
       element: <Layout />,

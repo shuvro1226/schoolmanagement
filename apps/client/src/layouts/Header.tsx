@@ -5,7 +5,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { NavLink } from "react-router-dom";
 
-export default function Header() {
+export default function Header(): JSX.Element {
   return (
     <div className="container fixed top-0 start-0 py-4 w-full m-0 bg-slate-200">
       <NavigationMenu>

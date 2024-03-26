@@ -12,13 +12,6 @@ import dayjs from "dayjs";
 import { OptionType } from "@/types/types";
 import { MultiValue } from "react-select";
 
-const lessonDataDefaultValue: LessonFormInputType = {
-  name: "",
-  startDate: dayjs().toDate(),
-  endDate: dayjs().add(7, "day").toDate(),
-  students: null,
-};
-
 export default function useLessons(): LessonHookReturnType {
   const [lessons, setLessons] = useState<Lesson[]>([]);
   const [getLessons] = useLazyQuery(getAllLessons, {
@@ -26,6 +19,17 @@ export default function useLessons(): LessonHookReturnType {
   });
   const [createLesson] = useMutation(CreateLessonMutation);
 
+  const lessonDataDefaultValue: LessonFormInputType = {
+    name: "",
+    startDate: dayjs().toDate(),
+    endDate: dayjs().add(7, "day").toDate(),
+    students: null,
+  }
+  const errorDefaultValue = {
+    show: false,
+    message: "",
+  };
+  
   const handleCreateLesson = (input: CreateLessonInput) => {
     createLesson({
       variables: {
@@ -49,10 +53,7 @@ export default function useLessons(): LessonHookReturnType {
   const [lessonData, setLessonData] = useState<LessonFormInputType>({
     ...lessonDataDefaultValue,
   });
-  const [error, setError] = useState({
-    show: false,
-    message: "",
-  });
+  const [error, setError] = useState(errorDefaultValue);
 
   const handleFormDataChange = (
     key: string,
@@ -69,8 +70,7 @@ export default function useLessons(): LessonHookReturnType {
   ) => {
     const { name, startDate, endDate, students } = lessonData;
     let errorObject = {
-      show: false,
-      message: "",
+      ...errorDefaultValue
     };
     if (name === "") {
       errorObject = {

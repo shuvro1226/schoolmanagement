@@ -1,10 +1,9 @@
 import useLessons from "@/hooks/useLessons";
-import { Lesson as LessonType } from "../../types/LessonTypes";
-import Lesson from "./Lesson";
-import AddLesson from "@/features/Lesson/AddLesson";
+import AddLesson from "@/features/lesson/components/AddLesson";
 import { useEffect } from "react";
+import LessonsList from "@/features/lesson/components/LessonsList";
 
-export default function Lessons() {
+export default function Lessons(): JSX.Element {
   const lessonHookObj = useLessons();
   const { lessons, handleGetLessons } = lessonHookObj;
 
@@ -18,11 +17,7 @@ export default function Lessons() {
         <span className="text-xl">Lessons</span>
         <AddLesson lessonHookObj={lessonHookObj} />
       </div>
-      <div className="grid grid-cols-3 gap-8">
-        {lessons?.map((lesson: LessonType) => {
-          return <Lesson key={lesson.id} lesson={lesson} />;
-        })}
-      </div>
+      <LessonsList lessons={lessons} />
     </div>
   );
 }

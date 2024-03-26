@@ -20,7 +20,7 @@ import { Student } from "@/types/StudentTypes";
 import { OptionType } from "@/types/types";
 import { LessonHookReturnType } from "@/types/LessonTypes";
 
-export default function AddLesson(props: { lessonHookObj: LessonHookReturnType }) {
+export default function AddLesson(props: { lessonHookObj: LessonHookReturnType }): JSX.Element {
   const { lessonHookObj } = props;
   const { students, handleGetStudents } = useStudent();
   const { lessonData, error, handleAddNewLesson, handleFormDataChange } =

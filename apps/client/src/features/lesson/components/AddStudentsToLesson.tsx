@@ -18,7 +18,7 @@ import { LessonDetailsHookReturnType } from "@/types/LessonTypes";
 
 export default function AddStudentsToLesson(props: {
   lessonDetailsHookObj: LessonDetailsHookReturnType;
-}) {
+}): JSX.Element {
   const { lessonDetailsHookObj } = props;
   const { students, handleGetStudents } = useStudent();
   const { newStudents, handleUpdateStudents, handleAddStudentsToLesson } =
