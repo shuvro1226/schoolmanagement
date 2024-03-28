@@ -1,4 +1,4 @@
-import { CreateLessonInput, Lesson } from "@/types/LessonTypes";
+import { CreateLessonInput, Lesson } from "@/features/lesson/LessonTypes";
 
 export const mockCreateLessonInput: CreateLessonInput = {
   name: "Test Lesson",

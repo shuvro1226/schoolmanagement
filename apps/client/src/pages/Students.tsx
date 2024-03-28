@@ -1,16 +1,16 @@
 import AddStudent from "@/features/student/components/AddStudent";
 import StudentsList from "@/features/student/components/StudentsList";
-import useStudent from "@/hooks/useStudent";
+import { useStudents } from "@/features/student/hooks";
 import { useEffect } from "react";
 
 export default function Students(): JSX.Element {
-  const studentHookObj = useStudent();
+  const studentHookObj = useStudents();
   const { students, handleGetStudents } = studentHookObj;
 
   useEffect(() => {
     handleGetStudents();
-  }, [])
-  
+  }, []);
+
   return (
     <>
       <h2>Students</h2>

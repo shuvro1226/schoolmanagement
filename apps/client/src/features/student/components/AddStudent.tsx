@@ -8,22 +8,16 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { StudentHookReturnType } from "@/types/StudentTypes";
+import { StudentHookReturnType } from "@/features/student/StudentTypes";
+import { TextInput } from "@/components/form";
 
 export default function AddStudent(props: {
   studentHookObj: StudentHookReturnType;
 }): JSX.Element {
   const { studentHookObj } = props;
-  const {
-    error,
-    studentData,
-    handleFormDataChange,
-    handleAddNewStudent,
-  } = studentHookObj;
+  const { error, studentData, handleFormDataChange, handleAddNewStudent } =
+    studentHookObj;
 
   return (
     <Dialog>
@@ -43,32 +37,24 @@ export default function AddStudent(props: {
               <AlertDescription>{error.message}</AlertDescription>
             </Alert>
           )}
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="firstName" className="text-right">
-              First Name
-            </Label>
-            <Input
-              id="firstName"
-              defaultValue={studentData.firstName}
-              className="col-span-3"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                handleFormDataChange("firstName", e.target.value)
-              }
-            />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="lastName" className="text-right">
-              Name
-            </Label>
-            <Input
-              id="lastName"
-              defaultValue={studentData.lastName}
-              className="col-span-3"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                handleFormDataChange("lastName", e.target.value)
-              }
-            />
-          </div>
+          <TextInput
+            config={{
+              identifier: "firstName",
+              label: "First Name",
+              defaultValue: studentData.firstName,
+              handleChange: handleFormDataChange,
+              wrapperClass: "grid grid-cols-4 items-center gap-4",
+            }}
+          />
+          <TextInput
+            config={{
+              identifier: "lastName",
+              label: "Last Name",
+              defaultValue: studentData.lastName,
+              handleChange: handleFormDataChange,
+              wrapperClass: "grid grid-cols-4 items-center gap-4",
+            }}
+          />
         </div>
         <DialogFooter>
           <DialogClose asChild>

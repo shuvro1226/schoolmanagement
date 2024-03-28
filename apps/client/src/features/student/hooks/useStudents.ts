@@ -4,11 +4,11 @@ import {
   CreateStudentInputType,
   Student,
   StudentHookReturnType,
-} from "@/types/StudentTypes";
+} from "@/features/student/StudentTypes";
 import { useLazyQuery, useMutation } from "@apollo/client";
 import { useState } from "react";
 
-export default function useStudent(): StudentHookReturnType {
+export default function useStudents(): StudentHookReturnType {
   const [students, setStudents] = useState<Student[]>([]);
   const [getStudents] = useLazyQuery(getAllStudents, {
     fetchPolicy: "no-cache",

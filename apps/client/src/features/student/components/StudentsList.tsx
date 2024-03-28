@@ -7,7 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Student } from "@/types/StudentTypes";
+import { Student } from "@/features/student/StudentTypes";
 
 type Props = {
   students: Student[];

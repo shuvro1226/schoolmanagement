@@ -6,10 +6,10 @@ import {
   Lesson,
   LessonFormInputType,
   LessonHookReturnType,
-} from "@/types/LessonTypes";
+} from "@/features/lesson/LessonTypes";
 import { CreateLessonMutation } from "@/graphql/mutations/LessonMutations";
 import dayjs from "dayjs";
-import { OptionType } from "@/types/types";
+import { OptionType } from "@/types/GenericTypes";
 import { MultiValue } from "react-select";
 
 export default function useLessons(): LessonHookReturnType {

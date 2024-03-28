@@ -1,4 +1,4 @@
-import { ErrorType } from "./types";
+import { ErrorType } from "../../types/GenericTypes";
 
 export type Student = {
     id: string;

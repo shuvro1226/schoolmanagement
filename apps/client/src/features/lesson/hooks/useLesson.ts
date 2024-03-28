@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useLazyQuery, useMutation } from "@apollo/client";
 import { getLessonByIDQuery } from "@/graphql/queries/LessonQueries";
-import { Lesson, LessonDetailsHookReturnType } from "@/types/LessonTypes";
+import { Lesson, LessonDetailsHookReturnType } from "@/features/lesson/LessonTypes";
 import { useParams } from "react-router-dom";
 import { AssignStudentsToLessonMutation } from "@/graphql/mutations/LessonMutations";
-import { OptionType } from "@/types/types";
-import { Student } from "@/types/StudentTypes";
+import { OptionType } from "@/types/GenericTypes";
+import { Student } from "@/features/student/StudentTypes";
 
 export default function useLesson(): LessonDetailsHookReturnType {
   const { lessonId } = useParams();

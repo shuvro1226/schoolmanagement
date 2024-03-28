@@ -7,20 +7,19 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import Select from "react-select";
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
 import { useEffect } from "react";
 
-import useStudent from "@/hooks/useStudent";
-import { Student } from "@/types/StudentTypes";
-import { LessonDetailsHookReturnType } from "@/types/LessonTypes";
+import { useStudents } from "@/features/student/hooks";
+import { Student } from "@/features/student/StudentTypes";
+import { LessonDetailsHookReturnType } from "@/features/lesson/LessonTypes";
+import { MultiSelectInput } from "@/components/form";
 
 export default function AddStudentsToLesson(props: {
   lessonDetailsHookObj: LessonDetailsHookReturnType;
 }): JSX.Element {
   const { lessonDetailsHookObj } = props;
-  const { students, handleGetStudents } = useStudent();
+  const { students, handleGetStudents } = useStudents();
   const { newStudents, handleUpdateStudents, handleAddStudentsToLesson } =
     lessonDetailsHookObj;
 
@@ -44,20 +43,16 @@ export default function AddStudentsToLesson(props: {
           <DialogTitle>Create new lesson</DialogTitle>
         </DialogHeader>
         <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="endDate" className="text-right">
-              Students
-            </Label>
-            <Select
-              className="w-64"
-              value={newStudents}
-              onChange={(value: any) =>
-                handleUpdateStudents(value)
-              }
-              options={options}
-              isMulti={true}
-            />
-          </div>
+          <MultiSelectInput
+            config={{
+              identifier: "students",
+              label: "Students",
+              defaultValue: newStudents,
+              handleChange: handleUpdateStudents,
+              wrapperClass: "grid grid-cols-4 items-center gap-4",
+              options,
+            }}
+          />
         </div>
         <DialogFooter>
           <DialogClose asChild>

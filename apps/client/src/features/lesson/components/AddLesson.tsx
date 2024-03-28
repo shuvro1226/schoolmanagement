@@ -7,28 +7,22 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import Select, { MultiValue } from "react-select";
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import DatePicker from "react-datepicker";
-import { useEffect } from "react";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import useStudent from "@/hooks/useStudent";
-import { Student } from "@/types/StudentTypes";
-import { OptionType } from "@/types/types";
-import { LessonHookReturnType } from "@/types/LessonTypes";
+import { Student, StudentHookReturnType } from "@/features/student/StudentTypes";
+import { LessonHookReturnType } from "@/features/lesson/LessonTypes";
+import { addLessonFormConfig } from "../config";
+import FormRenderer from "@/components/form";
 
-export default function AddLesson(props: { lessonHookObj: LessonHookReturnType }): JSX.Element {
-  const { lessonHookObj } = props;
-  const { students, handleGetStudents } = useStudent();
+export default function AddLesson(props: {
+  lessonHookObj: LessonHookReturnType;
+  studentsHookObj: StudentHookReturnType;
+}): JSX.Element {
+  const { lessonHookObj, studentsHookObj } = props;
   const { lessonData, error, handleAddNewLesson, handleFormDataChange } =
     lessonHookObj;
-
-  useEffect(() => {
-    handleGetStudents();
-  }, []);
+  const { students } = studentsHookObj;
 
   const options = students.map((student: Student) => {
     return { value: student.id, label: student.firstName + student.lastName };
@@ -52,55 +46,13 @@ export default function AddLesson(props: { lessonHookObj: LessonHookReturnType }
               <AlertDescription>{error.message}</AlertDescription>
             </Alert>
           )}
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              Name
-            </Label>
-            <Input
-              id="name"
-              defaultValue={lessonData.name}
-              className="col-span-3"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                handleFormDataChange("name", e.target.value)
-              }
-            />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="startDate" className="text-right">
-              Start Date
-            </Label>
-            <DatePicker
-              className="outline outline-1 p-2"
-              selected={lessonData.startDate}
-              onChange={(date: Date) => handleFormDataChange("startDate", date)}
-              dateFormat={"d.MM.yyyy"}
-            />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="endDate" className="text-right">
-              End Date
-            </Label>
-            <DatePicker
-              className="outline outline-1 p-2"
-              selected={lessonData.endDate}
-              onChange={(date: Date) => handleFormDataChange("endDate", date)}
-              dateFormat={"d.MM.yyyy"}
-            />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="endDate" className="text-right">
-              Students
-            </Label>
-            <Select
-              className="w-64"
-              value={lessonData.students}
-              onChange={(value: MultiValue<OptionType | null>) =>
-                handleFormDataChange("students", value)
-              }
-              options={options}
-              isMulti={true}
-            />
-          </div>
+          <FormRenderer
+            formConfig={addLessonFormConfig(
+              lessonData,
+              handleFormDataChange,
+              options
+            )}
+          />
         </div>
         <DialogFooter>
           <DialogClose asChild>

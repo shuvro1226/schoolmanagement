@@ -1,4 +1,4 @@
-import { Lesson as LessonType } from "@/types/LessonTypes";
+import { Lesson as LessonType } from "@/features/lesson/LessonTypes";
 import Lesson from "./LessonGrid";
 import { Link } from "react-router-dom";
 
