@@ -12,7 +12,7 @@ export default function MultiSelectInput(props: Props) {
   const { identifier, label, defaultValue, handleChange, options, wrapperClass } = config;
   return (
     <div className={wrapperClass}>
-      <Label htmlFor="endDate" className="text-right">
+      <Label htmlFor={identifier} className="text-right">
         {label}
       </Label>
       <Select

@@ -8,7 +8,8 @@ type Props = {
 
 export default function TextInput(props: Props) {
   const { config } = props;
-  const { identifier, label, defaultValue, handleChange, wrapperClass } = config;
+  const { identifier, label, defaultValue, handleChange, wrapperClass } =
+    config;
   return (
     <div className={wrapperClass}>
       <Label htmlFor={identifier} className="text-right">
@@ -21,6 +22,7 @@ export default function TextInput(props: Props) {
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           handleChange(identifier, e.target.value)
         }
+        role={identifier}
       />
     </div>
   );

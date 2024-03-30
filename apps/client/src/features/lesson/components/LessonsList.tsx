@@ -12,7 +12,7 @@ export default function LessonsList(props: Props): JSX.Element {
     <div id="lessoos_wrapper" className="grid grid-cols-3 gap-8">
       {lessons?.map((lesson: LessonType) => {
         return (
-          <Link key={lesson.id} to={`/lesson/${lesson.id}`}>
+          <Link key={lesson.id} to={`/lesson/${lesson.id}`} className="lesson-link">
             <Lesson lesson={lesson} />
           </Link>
         );
