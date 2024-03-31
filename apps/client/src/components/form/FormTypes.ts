@@ -1,4 +1,3 @@
-import { HandleFormDataChange } from "@/features/lesson/LessonTypes";
 import { OptionType } from "@/types/GenericTypes";
 
 export type FormRendererConfig = {
@@ -6,7 +5,7 @@ export type FormRendererConfig = {
     identifier: string;
     label: string;
     wrapperClass: string;
-    handleChange: HandleFormDataChange;
+    handleChange: any;
     options?: OptionType[];
     defaultValue: any;
   };
