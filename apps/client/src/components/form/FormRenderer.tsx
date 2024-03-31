@@ -13,13 +13,13 @@ export default function FormRenderer(props: Props) {
   const formFields = formConfig.map((config) => {
     let field;
     if (config.type === "text") {
-      field = <TextInput config={config} />;
+      field = <TextInput config={config} key={config.identifier} />;
     }
     if (config.type === "date") {
-      field = <DatePickerInput config={config} />;
+      field = <DatePickerInput config={config} key={config.identifier} />;
     }
     if (config.type === "multiselect") {
-      field = <MultiSelectInput config={config} />;
+      field = <MultiSelectInput config={config} key={config.identifier} />;
     }
     return field;
   });
