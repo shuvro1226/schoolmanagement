@@ -1,9 +1,10 @@
 import { CreateLessonInput, Lesson } from "@/features/lesson/LessonTypes";
+import dayjs from "dayjs";
 
 export const mockCreateLessonInput: CreateLessonInput = {
   name: "",
-  startDate: new Date().toISOString(),
-  endDate: new Date().toISOString(),
+  startDate: dayjs().toISOString(),
+  endDate: dayjs().add(7, "day").toISOString(),
   students: ["1", "2"],
 };
 

@@ -56,8 +56,8 @@ export default function AddLesson(props: {
         </div>
         <DialogFooter>
           <DialogClose asChild>
-            <Button variant="outline" role="create-lesson" onClick={(e) => handleAddNewLesson(e)}>
-              Save changes
+            <Button variant="outline" onClick={(e) => handleAddNewLesson(e)}>
+              Save lesson
             </Button>
           </DialogClose>
         </DialogFooter>

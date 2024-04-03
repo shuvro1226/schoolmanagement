@@ -22,7 +22,6 @@ export default function TextInput(props: Props) {
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           handleChange(identifier, e.target.value)
         }
-        role={identifier}
       />
     </div>
   );
