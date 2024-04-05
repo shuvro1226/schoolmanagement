@@ -10,16 +10,16 @@ import {
 import { Button } from "@/components/ui/button";
 import { useEffect } from "react";
 
-import { useStudents } from "@/features/student/hooks";
-import { Student } from "@/features/student/StudentTypes";
+import { Student, StudentHookReturnType } from "@/features/student/StudentTypes";
 import { LessonDetailsHookReturnType } from "@/features/lesson/LessonTypes";
 import { MultiSelectInput } from "@/components/form";
 
 export default function AddStudentsToLesson(props: {
   lessonDetailsHookObj: LessonDetailsHookReturnType;
+  studentsHookObj: StudentHookReturnType;
 }): JSX.Element {
-  const { lessonDetailsHookObj } = props;
-  const { students, handleGetStudents } = useStudents();
+  const { lessonDetailsHookObj, studentsHookObj } = props;
+  const { students, handleGetStudents } = studentsHookObj;
   const { newStudents, handleUpdateStudents, handleAddStudentsToLesson } =
     lessonDetailsHookObj;
 

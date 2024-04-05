@@ -3,10 +3,13 @@ import AddStudentsToLesson from "@/features/lesson/components/AddStudentsToLesso
 import { useEffect } from "react";
 import StudentsList from "@/features/student/components/StudentsList";
 import LessonInfo from "@/features/lesson/components/LessonInfo";
+import { useStudents } from "@/features/student/hooks";
 
 export default function LessonDetails(): JSX.Element {
   const lessonDetailsHookObj = useLesson();
   const { lessonDetails, handleGetLessonByID } = lessonDetailsHookObj;
+
+  const studentsHookObj = useStudents();
 
   const { name = "", students = [] } = lessonDetails;
 
@@ -16,7 +19,10 @@ export default function LessonDetails(): JSX.Element {
 
   return (
     <div className="relative w-full">
-      <AddStudentsToLesson lessonDetailsHookObj={lessonDetailsHookObj} />
+      <AddStudentsToLesson
+        lessonDetailsHookObj={lessonDetailsHookObj}
+        studentsHookObj={studentsHookObj}
+      />
       <LessonInfo lessonDetails={lessonDetails} />
       <StudentsList
         students={students}

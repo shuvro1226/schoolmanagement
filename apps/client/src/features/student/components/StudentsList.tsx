@@ -15,7 +15,7 @@ type Props = {
 };
 
 export default function StudentsList(props: Props): JSX.Element {
-  const { students, caption = '' } = props;
+  const { students, caption = "" } = props;
   return (
     <Table>
       {caption && <TableCaption>{caption}</TableCaption>}
@@ -28,7 +28,7 @@ export default function StudentsList(props: Props): JSX.Element {
       <TableBody>
         {students?.map((student: Student) => {
           return (
-            <TableRow>
+            <TableRow key={student.id}>
               <TableCell>{student.firstName}</TableCell>
               <TableCell>{student.lastName}</TableCell>
             </TableRow>

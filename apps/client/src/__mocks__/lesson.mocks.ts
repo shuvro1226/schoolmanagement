@@ -8,35 +8,36 @@ export const mockCreateLessonInput: CreateLessonInput = {
   students: ["1", "2"],
 };
 
+export const mockStudentOptions = [
+  { label: "John Doe", value: "1" },
+  { label: "Jane Doe", value: "2" },
+];
+
 export const mockLessonDetail = {
   id: "1",
   name: "Test Lesson 1",
   startDate: new Date(),
   endDate: new Date(),
-  students: [
-    { label: "John Doe", value: "1" },
-    { label: "Jane Doe", value: "2" },
-  ],
+  students: mockStudentOptions,
 };
+
+export const mockStudents = [
+  { id: "student1", firstName: "John", lastName: "Doe" },
+  { id: "student2", firstName: "Jane", lastName: "Doe" },
+];
 
 export const mockLessons: Lesson[] = [
   {
     ...mockCreateLessonInput,
     id: "1",
     name: "Test Lesson 1",
-    students: [
-      { id: "student1", firstName: "John", lastName: "Doe" },
-      { id: "student2", firstName: "Jane", lastName: "Doe" },
-    ],
+    students: mockStudents,
   },
   {
     ...mockCreateLessonInput,
     id: "2",
     name: "Test Lesson 2",
-    students: [
-      { id: "student1", firstName: "John", lastName: "Doe" },
-      { id: "student2", firstName: "Jane", lastName: "Doe" },
-    ],
+    students: mockStudents,
   },
 ];
 
@@ -46,6 +47,19 @@ export const mockLessonsHookReturnData = {
   error: { show: false, message: "" },
   handleAddNewLesson: vi.fn(),
   handleFormDataChange: vi.fn(),
-  handleGetLessons: vi.fn(),
+  handleGetLessons: vi.fn(() => mockLessons),
   handleCreateLesson: vi.fn(),
+};
+
+export const mockLessonDetailsHookReturnData = {
+  lessonDetails: {
+    ...mockLessonDetail,
+    students: mockStudents,
+    startDate: dayjs().toISOString(),
+    endDate: dayjs().add(7, "day").toISOString(),
+  },
+  newStudents: [{ label: "John Doe", value: "1" }],
+  handleGetLessonByID: vi.fn(),
+  handleUpdateStudents: vi.fn(),
+  handleAddStudentsToLesson: vi.fn(),
 };

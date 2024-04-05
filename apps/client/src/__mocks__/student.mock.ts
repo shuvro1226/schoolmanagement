@@ -5,7 +5,7 @@ export const mockStudents = [
 
 export const mockStudentsHookReturnData = {
   students: mockStudents,
-  studentData: mockStudents[0],
+  studentData: { firstName: "John", lastName: "Doe" },
   error: { show: false, message: "" },
   handleAddNewStudent: vi.fn(),
   handleFormDataChange: vi.fn(),
