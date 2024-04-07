@@ -1,4 +1,4 @@
-import { HandleFormDataChange, LessonFormInputType } from "@/features/lesson/LessonTypes";
+import { HandleFormDataChange, LessonFormInputType } from "@/features/lesson/types";
 import { OptionType } from "@/types/GenericTypes";
 
 export const addLessonFormConfig = (

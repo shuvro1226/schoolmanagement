@@ -1,6 +1,6 @@
 import { MultiValue } from "react-select";
 import { Student } from "../student/StudentTypes";
-import { OptionType } from "../../types/GenericTypes";
+import { ErrorType, OptionType } from "../../types/GenericTypes";
 
 interface BaseLessonType {
   name: string;
@@ -18,14 +18,9 @@ export interface Lesson extends BaseLessonType {
 
 export type LessonFormInputType = {
   name: string;
-  startDate: Date;
-  endDate: Date;
+  startDate: string;
+  endDate: string;
   students: null | OptionType[];
-};
-
-export type CreateLessonErrorType = {
-  show: boolean;
-  message: string;
 };
 
 export type HandleAddNewLesson = (
@@ -42,9 +37,8 @@ export type HandleGetLessons = () => void;
 export type HandleCreateLesson = (input: CreateLessonInput) => void;
 
 export type LessonHookReturnType = {
-  lessons: Lesson[];
   lessonData: LessonFormInputType;
-  error: CreateLessonErrorType;
+  error: ErrorType;
   handleAddNewLesson: HandleAddNewLesson;
   handleFormDataChange: HandleFormDataChange;
   handleGetLessons: HandleGetLessons;
@@ -53,7 +47,7 @@ export type LessonHookReturnType = {
 
 export type HandleGetLessonByID = () => void;
 
-export type HandleUpdateStudents = (value: OptionType[] | null) => void;
+export type HandleUpdateStudents = (_: string, value: OptionType[] | null) => void;
 
 export type HandleAddStudentsToLesson = (
   e: React.MouseEvent<HTMLButtonElement, MouseEvent>

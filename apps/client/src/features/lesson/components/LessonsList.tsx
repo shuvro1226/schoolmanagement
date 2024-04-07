@@ -1,18 +1,20 @@
-import { Lesson as LessonType } from "@/features/lesson/LessonTypes";
+import { Lesson as LessonType } from "@/features/lesson/types";
 import Lesson from "./LessonGrid";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "@/state/store";
 
-type Props = {
-  lessons: LessonType[];
-};
-
-export default function LessonsList(props: Props): JSX.Element {
-  const { lessons } = props;
+export default function LessonsList(): JSX.Element {
+  const lessons = useSelector((state: RootState) => state.lesson.lessons);
   return (
-    <div id="lessoos_wrapper" className="grid grid-cols-3 gap-8">
+    <div id="lessons_wrapper" className="grid grid-cols-3 gap-8">
       {lessons?.map((lesson: LessonType) => {
         return (
-          <Link key={lesson.id} to={`/lesson/${lesson.id}`} className="lesson-link">
+          <Link
+            key={lesson.id}
+            to={`/lesson/${lesson.id}`}
+            className="lesson-link"
+          >
             <Lesson lesson={lesson} />
           </Link>
         );

@@ -6,13 +6,11 @@ import { useLessons } from "@/features/lesson/hooks/index";
 
 export default function Lessons(): JSX.Element {
   const lessonHookObj = useLessons();
-  const { lessons, handleGetLessons } = lessonHookObj;
 
   const studentsHookObj = useStudents();
   const { handleGetStudents } = studentsHookObj;
 
   useEffect(() => {
-    handleGetLessons();
     handleGetStudents();
   }, []);
 
@@ -25,7 +23,7 @@ export default function Lessons(): JSX.Element {
           studentsHookObj={studentsHookObj}
         />
       </div>
-      <LessonsList lessons={lessons} />
+      <LessonsList />
     </div>
   );
 }

@@ -1,14 +1,18 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useLazyQuery, useMutation } from "@apollo/client";
 import { getLessonByIDQuery } from "@/graphql/queries/LessonQueries";
-import { Lesson, LessonDetailsHookReturnType } from "@/features/lesson/LessonTypes";
+import { Lesson, LessonDetailsHookReturnType } from "@/features/lesson/types";
 import { useParams } from "react-router-dom";
 import { AssignStudentsToLessonMutation } from "@/graphql/mutations/LessonMutations";
 import { OptionType } from "@/types/GenericTypes";
 import { Student } from "@/features/student/StudentTypes";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/state/store";
+import { setLessons } from "@/state/lesson/lessonsSlice";
 
 export default function useLesson(): LessonDetailsHookReturnType {
   const { lessonId } = useParams();
+  const dispatch = useDispatch();
   const [lessonDetails, setLessonDetails] = useState<Lesson>({
     id: "",
     name: "",
@@ -20,26 +24,45 @@ export default function useLesson(): LessonDetailsHookReturnType {
   const [assignStudentsToLesson] = useMutation(AssignStudentsToLessonMutation);
   const [getLessonByID] = useLazyQuery(getLessonByIDQuery);
 
-  const handleUpdateStudents = (value: OptionType[] | null) => {
-    setNewStudents(value);
-  }
+  const lessons = useSelector((state: RootState) => state.lesson.lessons);
 
-  const handleGetLessonByID = () => {
-    getLessonByID({
-      variables: { id: lessonId },
-      onCompleted: (data: { lesson: Lesson }) => {
-        setLessonDetails(data.lesson);
-        const currentStudents = data.lesson.students?.map(
-          (student: Student) => {
-            return {
-              value: student.id,
-              label: student.firstName + student.lastName,
-            };
-          }
-        );
-        setNewStudents(currentStudents);
-      },
+  const handleSetNewStudentsFromData = useCallback((students: Student[]) => {
+    const currentStudents = students?.map((student: Student) => {
+      return {
+        value: student.id,
+        label: student.firstName + student.lastName,
+      };
     });
+    setNewStudents(currentStudents);
+  }, []);
+
+  const handleGetLessonByID = useCallback(() => {
+    const lessonDetails = lessons.find(
+      (lesson: Lesson) => lesson.id === lessonId
+    );
+
+    // If the lesson is already in the store, use that data
+    if (lessons?.length > 0 && lessonDetails) {
+      setLessonDetails(lessonDetails);
+      handleSetNewStudentsFromData(lessonDetails.students);
+      // Otherwise, fetch the lesson data from the server
+    } else {
+      getLessonByID({
+        variables: { id: lessonId },
+        onCompleted: (data: { lesson: Lesson }) => {
+          setLessonDetails(data.lesson);
+          handleSetNewStudentsFromData(data.lesson.students);
+        },
+      });
+    }
+  }, [lessonId, getLessonByID, handleSetNewStudentsFromData, lessons]);
+
+  useEffect(() => {
+    handleGetLessonByID();
+  }, [handleGetLessonByID]);
+
+  const handleUpdateStudents = (_: string, value: OptionType[] | null) => {
+    setNewStudents(value);
   };
 
   const handleAddStudentsToLesson = (
@@ -57,7 +80,20 @@ export default function useLesson(): LessonDetailsHookReturnType {
           ),
         },
         onCompleted: (data) => {
-          setLessonDetails(data.assignStudentsToLesson);
+          const lessonDetails = lessons.find(
+            (lesson: Lesson) => data.assignStudentsToLesson.id === lesson.id
+          );
+          if (lessonDetails) {
+            const updatedLessons = lessons.map((lesson: Lesson) => {
+              if (lesson.id === data.assignStudentsToLesson.id) {
+                return data.assignStudentsToLesson;
+              }
+              return lesson;
+            });
+            dispatch(setLessons(updatedLessons));
+          } else {
+            setLessonDetails(data.assignStudentsToLesson);
+          }
         },
       });
     }

@@ -29,6 +29,7 @@ export const AssignStudentsToLessonMutation = gql`
       startDate
       endDate
       students {
+        id
         firstName
         lastName
       }

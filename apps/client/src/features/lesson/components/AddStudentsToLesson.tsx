@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { useEffect } from "react";
 
 import { Student, StudentHookReturnType } from "@/features/student/StudentTypes";
-import { LessonDetailsHookReturnType } from "@/features/lesson/LessonTypes";
+import { LessonDetailsHookReturnType } from "@/features/lesson/types";
 import { MultiSelectInput } from "@/components/form";
 
 export default function AddStudentsToLesson(props: {

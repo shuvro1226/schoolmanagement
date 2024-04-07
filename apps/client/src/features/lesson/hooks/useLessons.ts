@@ -1,59 +1,60 @@
-import { useState } from "react";
 import { useLazyQuery, useMutation } from "@apollo/client";
+import { MultiValue } from "react-select";
+import { useDispatch, useSelector } from "react-redux";
+import dayjs from "dayjs";
 import { getAllLessons } from "@/graphql/queries/LessonQueries";
 import {
   CreateLessonInput,
   Lesson,
   LessonFormInputType,
   LessonHookReturnType,
-} from "@/features/lesson/LessonTypes";
+} from "@/features/lesson/types";
 import { CreateLessonMutation } from "@/graphql/mutations/LessonMutations";
-import dayjs from "dayjs";
 import { OptionType } from "@/types/GenericTypes";
-import { MultiValue } from "react-select";
+import { setLessons } from "@/state/lesson/lessonsSlice";
+import { RootState } from "@/state/store";
+import { useCallback, useEffect, useState } from "react";
+import { errorDefaultValue, lessonDataDefaultValue } from "../consts";
 
 export default function useLessons(): LessonHookReturnType {
-  const [lessons, setLessons] = useState<Lesson[]>([]);
+  const dispatch = useDispatch();
+  const lessons = useSelector((state: RootState) => state.lesson.lessons);
+
+  // Lazy query to get all lessons
   const [getLessons] = useLazyQuery(getAllLessons, {
     fetchPolicy: "no-cache",
   });
+  // Mutation to create a new lesson
   const [createLesson] = useMutation(CreateLessonMutation);
-
-  const lessonDataDefaultValue: LessonFormInputType = {
-    name: "",
-    startDate: dayjs().toDate(),
-    endDate: dayjs().add(7, "day").toDate(),
-    students: null,
-  }
-  const errorDefaultValue = {
-    show: false,
-    message: "",
-  };
-  
-  const handleCreateLesson = (input: CreateLessonInput) => {
-    createLesson({
-      variables: {
-        createLessonInput: input,
-      },
-      onCompleted: () => {
-        handleGetLessons();
-        setLessonData({ ...lessonDataDefaultValue }); // Setting lesson data to default value after creating lesson
-      },
-    });
-  };
-
-  const handleGetLessons = () => {
-    getLessons({
-      onCompleted: (data) => {
-        setLessons(data.lessons);
-      },
-    });
-  };
 
   const [lessonData, setLessonData] = useState<LessonFormInputType>({
     ...lessonDataDefaultValue,
   });
   const [error, setError] = useState(errorDefaultValue);
+
+  const handleCreateLesson = (input: CreateLessonInput) => {
+    createLesson({
+      variables: {
+        createLessonInput: input,
+      },
+      onCompleted: (data: { createLesson: Lesson }) => {
+        dispatch(setLessons([...lessons, data.createLesson])); // Adding new lesson to the list of lessons
+        setLessonData({ ...lessonDataDefaultValue }); // Setting lesson data to default value after creating lesson
+      },
+    });
+  };
+
+  const handleGetLessons = useCallback(() => {
+    getLessons({
+      onCompleted: (data) => {
+        dispatch(setLessons(data.lessons));
+      },
+    });
+  }, []);
+
+  useEffect(() => {
+    lessons?.length === 0 && handleGetLessons();
+  }, [lessons, handleGetLessons]);
 
   const handleFormDataChange = (
     key: string,
@@ -69,8 +70,9 @@ export default function useLessons(): LessonHookReturnType {
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     const { name, startDate, endDate, students } = lessonData;
+    // set error object to default value before checking for errors
     let errorObject = {
-      ...errorDefaultValue
+      ...errorDefaultValue,
     };
     if (name === "") {
       errorObject = {
@@ -101,7 +103,6 @@ export default function useLessons(): LessonHookReturnType {
   };
 
   return {
-    lessons,
     lessonData,
     error,
     handleAddNewLesson,

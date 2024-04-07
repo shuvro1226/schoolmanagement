@@ -18,7 +18,7 @@ export default function DatePickerInput(props: Props) {
       <DatePicker
         className="outline outline-1 p-2"
         selected={defaultValue}
-        onChange={(date: Date) => handleChange(identifier, date)}
+        onChange={(date: Date) => handleChange(identifier, date.toISOString())}
         dateFormat={"dd.MM.yyyy"}
       />
     </div>

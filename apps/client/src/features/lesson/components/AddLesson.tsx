@@ -10,8 +10,11 @@ import {
 import { Button } from "@/components/ui/button";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Student, StudentHookReturnType } from "@/features/student/StudentTypes";
-import { LessonHookReturnType } from "@/features/lesson/LessonTypes";
+import {
+  Student,
+  StudentHookReturnType,
+} from "@/features/student/StudentTypes";
+import { LessonHookReturnType } from "@/features/lesson/types";
 import { addLessonFormConfig } from "../config";
 import FormRenderer from "@/components/form";
 
@@ -20,6 +23,7 @@ export default function AddLesson(props: {
   studentsHookObj: StudentHookReturnType;
 }): JSX.Element {
   const { lessonHookObj, studentsHookObj } = props;
+
   const { lessonData, error, handleAddNewLesson, handleFormDataChange } =
     lessonHookObj;
   const { students } = studentsHookObj;

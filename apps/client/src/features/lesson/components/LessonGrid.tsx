@@ -1,4 +1,4 @@
-import { Lesson } from "../LessonTypes";
+import { Lesson } from "../types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import dayjs from "dayjs";
 

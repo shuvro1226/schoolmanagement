@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { Lesson } from "@/features/lesson/LessonTypes";
+import { Lesson } from "@/features/lesson/types";
 
 type Props = {
   lessonDetails: Lesson;

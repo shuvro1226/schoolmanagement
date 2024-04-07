@@ -1,4 +1,4 @@
-import { CreateLessonInput, Lesson } from "@/features/lesson/LessonTypes";
+import { CreateLessonInput, Lesson } from "@/features/lesson/types";
 import dayjs from "dayjs";
 
 export const mockCreateLessonInput: CreateLessonInput = {
@@ -16,8 +16,8 @@ export const mockStudentOptions = [
 export const mockLessonDetail = {
   id: "1",
   name: "Test Lesson 1",
-  startDate: new Date(),
-  endDate: new Date(),
+  startDate: dayjs().toISOString(),
+  endDate: dayjs().add(7, "day").toISOString(),
   students: mockStudentOptions,
 };
 
@@ -42,7 +42,6 @@ export const mockLessons: Lesson[] = [
 ];
 
 export const mockLessonsHookReturnData = {
-  lessons: mockLessons,
   lessonData: mockLessonDetail,
   error: { show: false, message: "" },
   handleAddNewLesson: vi.fn(),

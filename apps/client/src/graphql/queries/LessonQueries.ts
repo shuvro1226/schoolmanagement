@@ -7,6 +7,11 @@ export const getAllLessons = gql`
       name
       startDate
       endDate
+      students {
+        id
+        firstName
+        lastName
+      }
     }
   }
 `;
