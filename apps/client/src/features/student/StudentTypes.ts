@@ -25,7 +25,6 @@ type HandleAddNewStudent = (
   type HandleCreateStudent = (input: CreateStudentInputType) => void;
   
   export type StudentHookReturnType = {
-    students: Student[];
     studentData: CreateStudentInputType;
     error: ErrorType;
     handleAddNewStudent: HandleAddNewStudent;

@@ -1,15 +1,12 @@
 import AddStudent from "@/features/student/components/AddStudent";
 import StudentsList from "@/features/student/components/StudentsList";
 import { useStudents } from "@/features/student/hooks";
-import { useEffect } from "react";
+import { RootState } from "@/state/store";
+import { useSelector } from "react-redux";
 
 export default function Students(): JSX.Element {
   const studentHookObj = useStudents();
-  const { students, handleGetStudents } = studentHookObj;
-
-  useEffect(() => {
-    handleGetStudents();
-  }, []);
+  const students = useSelector((state: RootState) => state.student.students);
 
   return (
     <>

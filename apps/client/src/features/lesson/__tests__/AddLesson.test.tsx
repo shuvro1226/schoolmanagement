@@ -40,7 +40,7 @@ describe("AddLesson", async () => {
       ...mockLessonsHookReturnData,
       error: { show: true, message: "Name can not be empty!" },
       handleAddNewLesson: vi.fn((e) => e.preventDefault()),
-    };
+    }; 
     render(
       <AddLesson
         lessonHookObj={updatedmockLessonsHookReturnData}

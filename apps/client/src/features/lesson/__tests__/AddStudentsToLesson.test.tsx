@@ -1,9 +1,10 @@
 import { mockLessonDetailsHookReturnData } from "@/__mocks__/lesson.mocks";
 import userEvent from "@testing-library/user-event";
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import { describe, it, expect, afterAll, vi } from "vitest";
 import AddStudentsToLesson from "../components/AddStudentsToLesson";
 import { mockStudentsHookReturnData } from "@/__mocks__/student.mock";
+import { render } from "@/test/ProviderWrapper";
 
 const user = userEvent.setup();
 

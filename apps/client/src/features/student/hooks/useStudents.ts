@@ -1,26 +1,33 @@
 import { CreateStudentMutation } from "@/graphql/mutations/StudentMutations";
 import { getAllStudents } from "@/graphql/queries/StudentQueries";
+import { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   CreateStudentInputType,
-  Student,
   StudentHookReturnType,
 } from "@/features/student/StudentTypes";
 import { useLazyQuery, useMutation } from "@apollo/client";
-import { useState } from "react";
+import { setStudents } from "@/state/student/studentSlice";
+import { RootState } from "@/state/store";
 
 export default function useStudents(): StudentHookReturnType {
-  const [students, setStudents] = useState<Student[]>([]);
+  const dispatch = useDispatch();
+  const students = useSelector((state: RootState) => state.student.students);
   const [getStudents] = useLazyQuery(getAllStudents, {
     fetchPolicy: "no-cache",
   });
 
-  const handleGetStudents = () => {
+  const handleGetStudents = useCallback(() => {
     getStudents({
       onCompleted: (data) => {
-        setStudents(data.students);
+        dispatch(setStudents(data.students));
       },
     });
-  };
+  }, []);
+
+  useEffect(() => {
+    students?.length === 0 && handleGetStudents();
+  }, [students, handleGetStudents]);
 
   const [createStudent] = useMutation(CreateStudentMutation);
 
@@ -29,7 +36,8 @@ export default function useStudents(): StudentHookReturnType {
       variables: {
         createStudentInput: input,
       },
-      onCompleted: () => {
+      onCompleted: (data) => {
+        dispatch(setStudents([...students, data.createStudent]));
         handleGetStudents();
       },
     });
@@ -78,7 +86,6 @@ export default function useStudents(): StudentHookReturnType {
   };
 
   return {
-    students,
     studentData,
     error,
     handleFormDataChange,

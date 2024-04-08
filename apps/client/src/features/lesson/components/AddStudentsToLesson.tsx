@@ -10,18 +10,24 @@ import {
 import { Button } from "@/components/ui/button";
 import { useEffect } from "react";
 
-import { Student, StudentHookReturnType } from "@/features/student/StudentTypes";
+import {
+  Student,
+  StudentHookReturnType,
+} from "@/features/student/StudentTypes";
 import { LessonDetailsHookReturnType } from "@/features/lesson/types";
 import { MultiSelectInput } from "@/components/form";
+import { RootState } from "@/state/store";
+import { useSelector } from "react-redux";
 
 export default function AddStudentsToLesson(props: {
   lessonDetailsHookObj: LessonDetailsHookReturnType;
   studentsHookObj: StudentHookReturnType;
 }): JSX.Element {
   const { lessonDetailsHookObj, studentsHookObj } = props;
-  const { students, handleGetStudents } = studentsHookObj;
+  const { handleGetStudents } = studentsHookObj;
   const { newStudents, handleUpdateStudents, handleAddStudentsToLesson } =
     lessonDetailsHookObj;
+  const students = useSelector((state: RootState) => state.student.students);
 
   useEffect(() => {
     handleGetStudents();
