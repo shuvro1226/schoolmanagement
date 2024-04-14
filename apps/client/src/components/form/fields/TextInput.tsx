@@ -17,7 +17,7 @@ export default function TextInput(props: Props) {
       </Label>
       <Input
         id={identifier}
-        defaultValue={defaultValue}
+        defaultValue={defaultValue as string}
         className="col-span-3"
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           handleChange(identifier, e.target.value)

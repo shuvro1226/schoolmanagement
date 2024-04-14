@@ -20,7 +20,7 @@ export type LessonFormInputType = {
   name: string;
   startDate: string;
   endDate: string;
-  students: null | OptionType[];
+  students: OptionType[];
 };
 
 export type HandleAddNewLesson = (

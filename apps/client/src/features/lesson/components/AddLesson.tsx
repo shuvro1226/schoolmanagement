@@ -12,21 +12,21 @@ import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import {
   Student,
-  StudentHookReturnType,
 } from "@/features/student/StudentTypes";
 import { LessonHookReturnType } from "@/features/lesson/types";
 import { addLessonFormConfig } from "../config";
 import FormRenderer from "@/components/form";
+import { RootState } from "@/state/store";
+import { useSelector } from "react-redux";
 
 export default function AddLesson(props: {
   lessonHookObj: LessonHookReturnType;
-  studentsHookObj: StudentHookReturnType;
 }): JSX.Element {
-  const { lessonHookObj, studentsHookObj } = props;
+  const { lessonHookObj } = props;
 
   const { lessonData, error, handleAddNewLesson, handleFormDataChange } =
     lessonHookObj;
-  const { students } = studentsHookObj;
+    const students = useSelector((state: RootState) => state.student.students);
 
   const options = students.map((student: Student) => {
     return { value: student.id, label: student.firstName + student.lastName };
@@ -35,7 +35,7 @@ export default function AddLesson(props: {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" className="w-40">
+        <Button variant="outline" className="w-40 justify-self-center md:justify-self-end">
           Add New Lesson
         </Button>
       </DialogTrigger>

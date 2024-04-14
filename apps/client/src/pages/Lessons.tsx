@@ -16,11 +16,10 @@ export default function Lessons(): JSX.Element {
 
   return (
     <div className="container">
-      <div className="mb-4 text-left grid grid-cols-2">
-        <span className="text-xl">Lessons</span>
+      <div className="mb-4 text-center md:text-left grid grid-cols-1 md:grid-cols-2">
+        <span className="text-xl mb-3">List of Lessons</span>
         <AddLesson
           lessonHookObj={lessonHookObj}
-          studentsHookObj={studentsHookObj}
         />
       </div>
       <LessonsList />

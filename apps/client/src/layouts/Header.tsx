@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 
 export default function Header(): JSX.Element {
   return (
-    <div className="container fixed top-0 start-0 py-4 w-full m-0 bg-slate-200">
+    <div className="fixed top-0 start-0 p-4 w-full m-0 bg-slate-200">
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>

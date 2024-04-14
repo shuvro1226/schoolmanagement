@@ -17,8 +17,8 @@ export default function MultiSelectInput(props: Props) {
       </Label>
       <Select
         className="w-64"
-        value={defaultValue}
-        onChange={(value: MultiValue<OptionType | null>) =>
+        value={defaultValue as MultiValue<OptionType>}
+        onChange={(value: MultiValue<OptionType>) =>
           handleChange(identifier, value)
         }
         options={options}

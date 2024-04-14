@@ -1,9 +1,9 @@
-export type OptionType = {
+export interface OptionType {
   value: string;
   label: string;
-};
+}
 
-export type ErrorType = {
+export interface ErrorType {
   show: boolean;
   message: string;
-};
+}
