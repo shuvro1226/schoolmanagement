@@ -1,10 +1,11 @@
 import { HandleFormDataChange, LessonFormInputType } from "@/features/lesson/types";
 import { OptionType } from "@/types/GenericTypes";
+import { MultiValue } from "react-select";
 
 export const addLessonFormConfig = (
   lessonData: LessonFormInputType,
   handleFormDataChange: HandleFormDataChange,
-  studentOptions: OptionType[]
+  studentOptions: MultiValue<OptionType>
 ) => [
   {
     type: "text",

@@ -58,7 +58,7 @@ export default function useLessons(): LessonHookReturnType {
 
   const handleFormDataChange = (
     key: string,
-    value: string | Date | MultiValue<OptionType | null>
+    value: string | Date | MultiValue<OptionType>
   ) => {
     setLessonData({
       ...lessonData,

@@ -9,6 +9,8 @@ import {
 import { useLazyQuery, useMutation } from "@apollo/client";
 import { setStudents } from "@/state/student/studentSlice";
 import { RootState } from "@/state/store";
+import { MultiValue } from "react-select";
+import { OptionType } from "@/types/GenericTypes";
 
 export default function useStudents(): StudentHookReturnType {
   const dispatch = useDispatch();
@@ -52,7 +54,7 @@ export default function useStudents(): StudentHookReturnType {
     message: "",
   });
 
-  const handleFormDataChange = (key: string, value: string) => {
+  const handleFormDataChange = (key: string, value: string | Date | MultiValue<OptionType>) => {
     setStudentData({
       ...studentData,
       [key]: value,

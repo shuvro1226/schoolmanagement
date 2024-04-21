@@ -9,6 +9,7 @@ import { Student } from "@/features/student/StudentTypes";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/state/store";
 import { setLessons } from "@/state/lesson/lessonsSlice";
+import { MultiValue } from "react-select";
 
 export default function useLesson(): LessonDetailsHookReturnType {
   const { lessonId } = useParams();
@@ -20,7 +21,7 @@ export default function useLesson(): LessonDetailsHookReturnType {
     endDate: "",
     students: [],
   });
-  const [newStudents, setNewStudents] = useState<OptionType[] | null>(null);
+  const [newStudents, setNewStudents] = useState<MultiValue<OptionType>>([]);
   const [assignStudentsToLesson] = useMutation(AssignStudentsToLessonMutation);
   const [getLessonByID] = useLazyQuery(getLessonByIDQuery);
 
@@ -61,8 +62,8 @@ export default function useLesson(): LessonDetailsHookReturnType {
     handleGetLessonByID();
   }, [handleGetLessonByID]);
 
-  const handleUpdateStudents = (_: string, value: OptionType[] | null) => {
-    setNewStudents(value);
+  const handleUpdateStudents = (_: string, value: string | Date | MultiValue<OptionType>) => {
+    setNewStudents(value as MultiValue<OptionType>);
   };
 
   const handleAddStudentsToLesson = (

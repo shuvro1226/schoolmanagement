@@ -20,7 +20,7 @@ export type LessonFormInputType = {
   name: string;
   startDate: string;
   endDate: string;
-  students: OptionType[];
+  students: MultiValue<OptionType>;
 };
 
 export type HandleAddNewLesson = (
@@ -29,7 +29,7 @@ export type HandleAddNewLesson = (
 
 export type HandleFormDataChange = (
   key: string,
-  value: string | Date | MultiValue<OptionType | null>
+  value: string | Date | MultiValue<OptionType>
 ) => void;
 
 export type HandleGetLessons = () => void;
@@ -47,7 +47,7 @@ export type LessonHookReturnType = {
 
 export type HandleGetLessonByID = () => void;
 
-export type HandleUpdateStudents = (_: string, value: OptionType[] | null) => void;
+export type HandleUpdateStudents = (_: string, value: string | Date | MultiValue<OptionType>) => void;
 
 export type HandleAddStudentsToLesson = (
   e: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -55,7 +55,7 @@ export type HandleAddStudentsToLesson = (
 
 export type LessonDetailsHookReturnType = {
   lessonDetails: Lesson;
-  newStudents: OptionType[] | null;
+  newStudents: MultiValue<OptionType>;
   handleGetLessonByID: HandleGetLessonByID;
   handleUpdateStudents: HandleUpdateStudents;
   handleAddStudentsToLesson: HandleAddStudentsToLesson;

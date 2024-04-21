@@ -6,7 +6,7 @@ export const lessonDataDefaultValue: LessonFormInputType = {
   name: "",
   startDate: dayjs().toDate().toISOString(),
   endDate: dayjs().add(7, "day").toDate().toISOString(),
-  students: null,
+  students: [],
 };
 export const errorDefaultValue: ErrorType = {
   show: false,
