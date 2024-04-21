@@ -6,9 +6,11 @@
     "dev": "turbo run dev",
     "build": "turbo run build",
     "start": "node apps/api/dist/main",
-    "test": "turbo run test"
+    "test": "turbo run test",
+    "build:digitalocean": "npm install --production=false && turbo run build"
   },
   "workspaces": [
     "apps/*"
   ]
 }
+  
