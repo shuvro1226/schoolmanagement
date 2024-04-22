@@ -3,7 +3,12 @@
     "pipeline": {
       "dev": {
         "cache": false,
-        "persistent": true
+        "persistent": true,
+        "env": [
+          "VITE_BACKEND_HOST",
+          "VITE_FRONTEND_HOST",
+          "MONGODB_URI"
+        ]
       },
       "test": {},
       "build": {
@@ -12,6 +17,11 @@
         ],
         "outputs": [
             "dist/**"
+        ],
+        "env": [
+          "VITE_BACKEND_HOST",
+          "VITE_FRONTEND_HOST",
+          "MONGODB_URI"
         ]
       }
     }

@@ -6,7 +6,7 @@ import "./index.css";
 import { store } from "./state/store.ts";
 
 const client = new ApolloClient({
-  uri: `http://${import.meta.env.VITE_BACKEND_HOST}/graphql`,
+  uri: import.meta.env.VITE_BACKEND_HOST,
   cache: new InMemoryCache(),
 });
 
