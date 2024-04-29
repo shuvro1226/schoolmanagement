@@ -43,6 +43,7 @@ export type LessonHookReturnType = {
   handleFormDataChange: HandleFormDataChange;
   handleGetLessons: HandleGetLessons;
   handleCreateLesson: HandleCreateLesson;
+  handleDeleteLessonByName: (name: string) => void;
 };
 
 export type HandleGetLessonByID = () => void;

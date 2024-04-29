@@ -3,11 +3,22 @@
 @tailwind utilities;
 
 #root {
+  padding-top: 72px;
+  height: 100vh;
+  width: 100vw;
+}
+
+#content-wrapper.dark {
+  background-color: #242424;
+}
+#content-wrapper.light {
+  background-color: #ffffff;
+}
+
+main {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-  margin-top: 56px;
+  padding: 1em;
 }
 
 .logo {

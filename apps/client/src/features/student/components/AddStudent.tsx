@@ -22,11 +22,11 @@ export default function AddStudent(props: {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" className="w-40">
+        <Button variant="outline"  className="w-40 justify-self-center md:justify-self-end">
           Add New Student
         </Button>
       </DialogTrigger>
-      <DialogContent className="bg-white">
+      <DialogContent className="bg-white dark:bg-neutral-950">
         <DialogHeader>
           <DialogTitle>Create new lesson</DialogTitle>
         </DialogHeader>

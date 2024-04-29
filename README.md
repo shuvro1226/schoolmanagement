@@ -1,6 +1,6 @@
 # School Management app
 
-This is a monorepo project using Turbo and NestJS for building a MongoDB-powered API and a frontend web client developed with React + TypeScript.
+This is a monorepo project using Turbo and NestJS for building a MongoDB-powered API and a frontend web client developed with React + TypeScript. This project requires docker desktop, node v20+(recommended) to run locally. Please make sure you have them installed on your machine.
 
 ## Installation
 
@@ -8,11 +8,23 @@ This is a monorepo project using Turbo and NestJS for building a MongoDB-powered
 ```bash
 git clone https://github.com/shuvro1226/schoolmanagement.git
 ```
-2. Install dependencies:
+2. Install Docker for your operating system (if not installed already). Open up a Terminal session and run:
+```bash
+docker run --name mongo -p 27017:27017 -d mongo
 ```
+MongoDB should be running.
+
+3. Install dependencies:
+```bash
 cd schoolmanagement
 npm install
 ```
+
+4. To generate local .env file in project root folder run:
+```bash
+npm run createenv
+```
+
 ## Development
 
 To start the development environment, run the following command:
@@ -38,12 +50,16 @@ npm run start
 
 ## Running Tests
 
-To run all tests for `api` and `client` run the following command fromn project root folder:
+To run all tests unit tests for `api` and `client` run the following command from project root folder:
 ```bash
 npm run test
 ```
-
 The same command can be used to run inside `api` and `client` folder to run tests only for api and client.
+
+To run all e2e tests for `client` run the following command from project root folder:
+```bash
+npm run test:e2e
+```
 
 ## Project Structure
 

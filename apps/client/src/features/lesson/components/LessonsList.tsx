@@ -13,7 +13,7 @@ export default function LessonsList(): JSX.Element {
           <Link
             key={lesson.id}
             to={`/lesson/${lesson.id}`}
-            className="lesson-link text-black hover:text-gray-800"
+            className="lesson-link text-black dark:text-white hover:text-gray-800 dark:hover:text-gray-200"
           >
             <Lesson lesson={lesson} />
           </Link>

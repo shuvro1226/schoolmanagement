@@ -9,10 +9,12 @@ export default function Students(): JSX.Element {
   const students = useSelector((state: RootState) => state.student.students);
 
   return (
-    <>
-      <h2>Students</h2>
-      <AddStudent studentHookObj={studentHookObj} />
+    <div className="container">
+      <div className="mb-4 text-center md:text-left grid grid-cols-1 md:grid-cols-2">
+        <span className="text-xl mb-3">Students</span>
+        <AddStudent studentHookObj={studentHookObj} />
+      </div>
       <StudentsList students={students} />
-    </>
+    </div>
   );
 }

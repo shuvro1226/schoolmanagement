@@ -39,4 +39,8 @@ export class LessonService {
     lesson.students = [...studentIds];
     return this.lessonRepository.save(lesson);
   }
+
+  async removeLessonByName(name: string): Promise<void> {
+    await this.lessonRepository.delete({ name });
+  }
 }

@@ -1,0 +1,32 @@
+name: Deploy Prod CI
+
+on:
+  push:
+    branches: [feature/ci-cd]
+  pull_request:
+    branches: [feature/ci-cd]
+
+jobs:
+  build:
+    runs-on: self-hosted
+    environment:
+      name: prod
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Create .env file with production environment variables
+        run: |
+          cat > .env << EOF
+          ${{ secrets.PROV_ENV_SECRETS }}
+          EOF
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build:digitalocean 

@@ -49,4 +49,10 @@ export class LessonResolver {
   async students(@Parent() lesson: Lesson) {
     return this.studntService.getManyStudents(lesson.students);
   }
+
+  // for removing lessons by name created during e2e tests
+  @Mutation(() => LessonType)
+  removeLessonByName(@Args('name') name: string) {
+    return this.lessonService.removeLessonByName(name);
+  }
 }

@@ -5,3 +5,4 @@ node_modules
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+apps/client/src/e2e/tests/example/*

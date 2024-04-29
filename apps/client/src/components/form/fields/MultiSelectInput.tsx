@@ -9,7 +9,21 @@ type Props = {
 
 export default function MultiSelectInput(props: Props) {
   const { config } = props;
-  const { identifier, label, defaultValue, handleChange, options, wrapperClass } = config;
+  const customStyles: any = {
+    option: (provided: any) => ({
+      ...provided,
+      color: "#242424",
+      padding: 10,
+    }),
+  };
+  const {
+    identifier,
+    label,
+    defaultValue,
+    handleChange,
+    options,
+    wrapperClass,
+  } = config;
   return (
     <div className={wrapperClass}>
       <Label htmlFor={identifier} className="text-right">
@@ -23,6 +37,13 @@ export default function MultiSelectInput(props: Props) {
         }
         options={options}
         isMulti={true}
+        classNames={{
+          control: (state) =>
+            state.isFocused
+              ? "text-black dark:text-black"
+              : "text-black dark:text-black",
+        }}
+        styles={customStyles}
       />
     </div>
   );
